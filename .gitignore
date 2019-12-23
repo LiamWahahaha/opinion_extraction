@@ -1,3 +1,8 @@
+# Misc
+server/util/__pycache__/*
+server/lang_model/stanford-corenlp-full-2018-10-05/*
+server/.vscode/*
+
 # Created by .ignore support plugin (hsz.mobi)
 ### Node template
 # Logs
