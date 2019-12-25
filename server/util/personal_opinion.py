@@ -110,14 +110,19 @@ def get_opinions(news,debug = False):
         ###type 1: 寻找 说的内容在说前的句子 诸如: "......。"XX说。
         if parser_list[idx_verb[i]+1][0]  == '。':
             #index = len("".join(word_list[:idx_sub[i]]))
-            if parser_list[idx_sub[i]-1][0] == '”':
-                begin = news[:index][::-1].find('“')
-                end = news[:index][::-1].find('”')
-                table[key].append(news[:index][::-1][end+1:begin][::-1])
-                #result = result + news[:index][::-1][end+1:begin][::-1]
-
+            # if parser_list[idx_sub[i]-1][0] == '”':
+            print('block 1')
+            
+            begin = news[:index][::-1].find('“')
+            end = news[:index][::-1].find('”')
+            if begin == -1 or end == -1:
+                continue
+            table[key].append(news[:index][::-1][end+1:begin][::-1])
+            #result = result + news[:index][::-1][end+1:begin][::-1]
+            
         ###type 2: 寻找说的前后都有 说的内容的句子， 诸如：”.....。“ XX说，”......。"
-        elif parser_list[idx_verb[i]+1][0] == '，'and parser_list[idx_verb[i]+2][0] == '“':
+        elif parser_list[idx_verb[i]+1][0] == '，' and parser_list[idx_verb[i]+2][0] == '“':
+            print('block 2')
             index1 = len("".join(word_list[:idx_sub[i]]))
             begin1 = float("inf")
             end1 = float("inf")
@@ -136,6 +141,7 @@ def get_opinions(news,debug = False):
 
         ###type 3: 寻找只有说的后面有句子，且形式为，XX说：“....。”
         elif parser_list[idx_verb[i]+1][0] == '：' and parser_list[idx_verb[i]+2][0] == '“':
+            print('block 3')
             begin = news[index:].find("“")
             end   = news[index:].find('”')
 
@@ -143,6 +149,7 @@ def get_opinions(news,debug = False):
             result += news[index:][begin:end+1]
         ###type 4: 寻找只有说的后面有句子，但形式为，XX说, .....。以及句号后可能还跟有句子。
         elif parser_list[idx_verb[i]+1][0] == '，':
+            print('block 4')
             sim = 1
             result0, index2 = get_next_sentence(index+2, news)
            
@@ -163,6 +170,8 @@ def get_opinions(news,debug = False):
                         break
                 else:
                     break
+
+
 
     return table
 
