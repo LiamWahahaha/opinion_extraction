@@ -112,7 +112,7 @@ def get_opinions(news,debug = False):
             #index = len("".join(word_list[:idx_sub[i]]))
             if parser_list[idx_sub[i]-1][0] == '”':
                 begin = news[:index][::-1].find('“')
-                end = news[:index][::-1].find('”。')
+                end = news[:index][::-1].find('”')
                 table[key].append(news[:index][::-1][end+1:begin][::-1])
                 #result = result + news[:index][::-1][end+1:begin][::-1]
 
@@ -135,9 +135,9 @@ def get_opinions(news,debug = False):
             #result += result1 + result2
 
         ###type 3: 寻找只有说的后面有句子，且形式为，XX说：“....。”
-        elif parser_list[idx_verb[i]+1][0] == '：' and parser_list[idx_verb[i]+2][0] == '”':
-            begin = news[index:].find("”")
-            end   = news[index:].find('“')
+        elif parser_list[idx_verb[i]+1][0] == '：' and parser_list[idx_verb[i]+2][0] == '“':
+            begin = news[index:].find("“")
+            end   = news[index:].find('”')
 
             table[key].append(news[index:][begin:end+1])
             result += news[index:][begin:end+1]
