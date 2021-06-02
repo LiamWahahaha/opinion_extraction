@@ -28,6 +28,6 @@ six==1.13.0
 smart-open==1.9.0
 stanfordcorenlp==3.9.1.1
 typed-ast==1.4.0
-urllib3==1.25.7
+urllib3==1.26.5
 Werkzeug==0.16.0
 wrapt==1.11.2
